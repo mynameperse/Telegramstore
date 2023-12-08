@@ -1,0 +1,29 @@
+{% extends 'storeapp/index.html' %}
+{% load static %}
+
+
+{% block content %}
+	<h1>Категории</h1>
+     {% for c in categories %}
+        <li {% if category.slug == c.slug %}class="nav-item"{% endif %}>
+          <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+        </li>
+    {% endfor %}
+
+    {% for product in products %}
+		<h2>ТОВАРЫ</h2>
+		<div class="col-4">
+			<a class="card product-card w-100" href="{{ product.get_absolute_url }}">
+				<img src="{{ product.image1.url }}" class="card-img-top" style="width: 150px" />
+				<div class="card-body">
+					<h5 class="card-title">
+						<div class="name">{{ product.name }}</div>
+						<div class="price">${{ product.price }}</div>
+					</h5>
+					<p class="card-text text-truncate">{{product.description}}</p>
+				</div>
+			</a>
+		</div>
+    {% endfor %}
+
+{% endblock %}
